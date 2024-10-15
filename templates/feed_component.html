@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+<div>
+                {% for room in rooms %}
+                    <div>
+                    {% if request.user == room.host %}
+                        <a href="{% url 'updateRoom' room.id%}">Edit</a>
+                        <a href="{% url 'deleteRoom' room.id%}">Delete</a>
+                        {% endif %}
+                        <a href="{% url 'userprofile' room.host.id%}">@{{ room.host }}</a>
+                        <h5>{{ room.id }}-- <a href="{% url 'room' room.id%}">{{ room.name }}</a></h5>
+                        <small>{{ room.description }}</small>
+                        <hr>
+                        <div class="d-flex justify-content-end">
+                            <div>
+                                <span>{{ room.topic }}</span>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+</body>
+</html>
